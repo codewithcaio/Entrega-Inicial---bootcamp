@@ -1,0 +1,12 @@
+# Regras de contexto (compatível com Cursor / outros agentes)
+
+Este arquivo espelha `.claude/CLAUDE.md`, mantido para compatibilidade caso o grupo use
+Cursor em vez de/além do Claude Code. As regras completas e o histórico de uso do agente estão
+em `.claude/CLAUDE.md` — leia-o primeiro.
+
+Resumo rápido:
+- Fonte da verdade é `docs/SPEC.md`. Não implemente regra de negócio que não esteja lá.
+- Ambiguidade encontrada durante a implementação vira uma entrada em `docs/REFINEMENTS.md`
+  antes de virar código.
+- Lógica de negócio só em `src/app/services/booking_service.py` (sem FastAPI/SQLAlchemy ali).
+- Nunca commitar direto em `main` ou `develop` — sempre `feature/*` + Pull Request.

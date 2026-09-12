@@ -1,0 +1,57 @@
+name: Test Harness
+
+# Roda a suíte de testes automaticamente em pushes e Pull Requests para develop/main —
+# reforça a regra de "nada entra em develop/main sem os testes passando" (ver CONTRIBUTING.md).
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Rodar test harness
+        run: python scripts/run_tests.py
+
+      - name: Salvar evidências locais do runner
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: testes-python
+          path: evidence/tests/
+
+  docker-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Construir e validar ambiente Docker
+        run: |
+          docker compose up --build --wait
+          docker compose run --rm api python scripts/run_tests.py
+      - name: Salvar logs do Docker
+        if: always()
+        run: |
+          mkdir -p evidence/docker
+          docker compose logs --no-color > evidence/docker/compose.log 2>&1
+          docker compose ps -a > evidence/docker/status.txt
+      - name: Publicar evidências Docker
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: testes-docker
+          path: evidence/
+      - name: Encerrar ambiente
+        if: always()
+        run: docker compose down

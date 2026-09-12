@@ -1,0 +1,33 @@
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+*.egg-info/
+build/
+dist/
+
+# Ambiente
+.venv/
+venv/
+env/
+.env
+
+# Banco local
+*.db
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/
+
+# SO
+.DS_Store
+Thumbs.db
+
+# Logs de execução gerados localmente (o log oficial da entrega fica em docs/EXECUTION_REPORT.md)
+*.log
+!evidence/**/*.log

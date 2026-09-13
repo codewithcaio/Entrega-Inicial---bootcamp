@@ -66,3 +66,10 @@ Origem: consulta de conflito e inserção separadas permitiam uma corrida.
 Decisão: transação BEGIN IMMEDIATE antes das leituras das escritas, válida entre conexões e
 processos do mesmo arquivo SQLite; timeout retorna 503. Teste dispara duas requisições em
 conexões independentes e verifica respostas 201/409 e apenas uma reserva persistida.
+
+## R-008 - Correcao do fluxo de aprovacao de PR (2026-09-13)
+Origem: revisao do Gabriel identificou que as 7 PRs iniciais foram mescladas sem uma aprovacao
+("Approved these changes") registrada antes do merge, exigida pelo enunciado da entrega.
+Decisao: em vez de reverter o codigo ja validado em main/develop, as 7 PRs foram reabertas como
+PRs novas (feature/revisao-*), cada uma documentando o escopo da area correspondente, com
+aprovacao do Gabriel via Review changes -> Approve registrada antes do merge.

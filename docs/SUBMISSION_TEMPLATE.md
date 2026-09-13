@@ -1,16 +1,16 @@
-# Entrega 1 — SalaFácil
+﻿# Entrega 1 — SalaFácil
 
 **MODELO PARA PREENCHER E EXPORTAR COMO PDF. Não é a entrega final completa.**
 
 ## Identificação
-Disciplina/turma: PENDENTE. Data da entrega: PENDENTE.
+Disciplina/turma: Bootcamp III. Data da entrega: 13/09/2026.
 
 | Nome completo | RA |
 |---|---|
 | Gabriel Vieira Souza | 22552446 |
 | Caio da Silva Diniz | 22552405 |
 
-Repositório público GitHub ou com acesso aos professores: PENDENTE.
+Repositório público GitHub ou com acesso aos professores: https://github.com/codewithcaio/Entrega-Inicial---bootcamp
 
 ## Projeto e especificação
 API de reserva de salas com cadastro de salas/usuários, validação de capacidade e expediente,
@@ -38,8 +38,19 @@ Logs originais em evidence/tests/ e resumo em docs/EXECUTION_REPORT.md.
 4. Registro da interação com o assistente e alterações correspondentes.
 
 ## Governança
-Divisão de tarefas e responsáveis: PENDENTE.
-Issues/Project: PENDENTE. PRs e respectivas aprovações antes de merge: PENDENTE.
+Divisão de tarefas e responsáveis: Caio da Silva Diniz — especificação técnica (#8),
+configuração do agente de IA (#9), endpoints da API (#11), ambiente Docker e CI (#13).
+Gabriel Vieira Souza — models/schemas e regras de negócio (#10), suíte de testes e test
+harness (#12), governança do projeto (#14).
+
+Issues/Project: quadro GitHub Projects "SalaFácil — Entrega 1", 7 issues (uma por área),
+todas movidas para Done, com responsável atribuído em cada uma (ver acima).
+
+PRs e respectivas aprovações antes de merge: PRs #1-#7 mescladas inicialmente sem aprovação
+formal registrada antes do merge. Identificado o gap em revisão do time e corrigido: as 7
+áreas foram reabertas como PRs novas (feature/revisao-*), cada uma com o escopo documentado em
+evidence/reviews/ e aprovação (Review changes -> Approve) do revisor registrada antes do
+merge. Ver histórico de cada PR feature/revisao-* para o registro completo.
 
 ## Conferência final
 Substituir todos os PENDENTE, inserir imagens/logs, verificar acesso ao repositório,

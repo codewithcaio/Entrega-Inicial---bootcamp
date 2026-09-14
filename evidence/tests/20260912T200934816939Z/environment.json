@@ -1,0 +1,20 @@
+{
+  "started_at_utc": "20260912T200934816939Z",
+  "python": "3.12.14 (main, Sep  1 2026, 00:10:07) [GCC 14.2.0]",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.41",
+  "command": [
+    "/usr/local/bin/python",
+    "-m",
+    "pytest",
+    "-v",
+    "--cov=app",
+    "--cov-report=term-missing",
+    "--cov-report=json:/app/evidence/tests/20260912T200934816939Z/coverage.json",
+    "--junitxml=/app/evidence/tests/20260912T200934816939Z/junit.xml"
+  ],
+  "environment": "docker-compose",
+  "test_database": "SQLite em memória e arquivos temporários",
+  "test_business_hours_utc": "08:00–20:00",
+  "services_coverage_percent": 100.0,
+  "exit_code": 0
+}

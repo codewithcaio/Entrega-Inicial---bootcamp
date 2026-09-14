@@ -1,19 +1,15 @@
 # Evidências da entrega
 
-- `tests/<data>/`: logs reais, ambiente, cobertura JSON e relatório JUnit da revisão local.
-- `ai/REVISION.md`: registro factual da revisão assistida nesta conversa.
-- `docker/`: reservado para execução real Docker; ainda pendente.
-- `github/`: reservado para links/prints de Issues, PRs e reviews reais; ainda pendente.
+- `tests/20260911T210820055929Z/`: execução Python local histórica.
+- `tests/20260912T200934816939Z/`: execução Docker real por Gabriel; log, ambiente, cobertura e JUnit intactos.
+- `docker/`: prints do build Healthy e resultado dos 78 testes.
+- `github/`: print do Actions e referências verificadas no relatório.
+- `ai/`: registro da revisão e capturas do uso do OpenAI Codex desktop por Gabriel.
+- `reviews/`: registros de revisões documentais posteriores aos PRs originais.
 
-O harness cria uma pasta nova a cada execução e preserva resultados anteriores.
-Falhas e warnings fazem parte dos logs; o código de saída é registrado.
-As dependências exatas da revisão Windows estão em `tests/review-environment.txt`;
-esse arquivo é evidência do ambiente, não um lock de instalação multiplataforma.
-
-## Captura restante
-1. Rodar `docker compose up --build --wait` e registrar a aplicação saudável.
-2. Rodar `docker compose run --rm api python scripts/run_tests.py`.
-3. Salvar `docker compose logs --no-color` e status em docker/.
-4. Registrar Issues atribuídas, PRs com revisão e aprovação anteriores ao merge.
-5. Anexar a interação real do assistente escolhido e ligar alterações aos commits/PRs.
-6. Inserir as evidências e identificação no modelo de submissão.
+Resultados: 78 aprovados, 0 falhas, 55 avisos, 1,67 s de pytest, cobertura 93,60%,
+services 100%, código de saída 0. Consulte [o relatório](../docs/EXECUTION_REPORT.md).
+Os avisos foram preservados. As aprovações posteriores não são retroativas.
+As imagens mostram o momento da captura e podem conter textos anteriores à correção.
+Os arquivos chamados PENDING.md são mantidos como referências históricas, agora com
+o estado atualizado. Esta atualização não altera o PDF.

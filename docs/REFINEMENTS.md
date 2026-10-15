@@ -73,3 +73,17 @@ Origem: revisao do Gabriel identificou que as 7 PRs iniciais foram mescladas sem
 Decisao: em vez de reverter o codigo ja validado em main/develop, as 7 PRs foram reabertas como
 PRs novas (feature/revisao-*), cada uma documentando o escopo da area correspondente, com
 aprovacao do Gabriel via Review changes -> Approve registrada antes do merge.
+
+## R-009 - Remoção de utcnow preservando o contrato UTC (2026-10-15)
+
+Origem: a execução local de referência apresentou 78 testes aprovados e 55 avisos,
+54 deles associados a `datetime.utcnow()` no projeto. A chamada é descontinuada
+no Python 3.12. A geração de datas passou a usar UTC explícito, removendo o offset
+para preservar o armazenamento e as respostas já definidos na SPEC seção 8.
+
+Não há mudança de contrato de API ou regra de negócio. O teste de criação agora
+verifica também o formato e o instante UTC de `created_at`. A suíte manteve os
+78 testes aprovados; os avisos caíram para um, originado em Starlette/AnyIO.
+O [comparativo e os logs](AVISOS_DEPRECACAO.md) registram os resultados reais e a
+limitação externa restante. A revisão humana desta alteração deve ser registrada
+no PR da Issue #32 antes do merge.

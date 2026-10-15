@@ -5,7 +5,7 @@ caso, para manter rastreabilidade com docs/SPEC.md.
 """
 from __future__ import annotations
 
-from datetime import timedelta
+from datetime import datetime, timedelta, timezone
 
 from tests.conftest import future_slot, iso
 
@@ -79,9 +79,7 @@ def test_booking_within_business_hours_at_the_edges_is_accepted(client, room_fac
 def test_booking_in_the_past_rejected(client, room_factory, user_factory):
     room = room_factory()
     user = user_factory()
-    from datetime import datetime
-
-    start = datetime.utcnow() - timedelta(days=1)
+    start = datetime.now(timezone.utc).replace(tzinfo=None) - timedelta(days=1)
     end = start + timedelta(hours=1)
 
     response = _create_booking(client, room["id"], user["id"], start, end)

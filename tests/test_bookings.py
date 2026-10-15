@@ -5,6 +5,8 @@ test_edge_cases.py — aqui cobrimos os caminhos principais descritos na SPEC.md
 """
 from __future__ import annotations
 
+from datetime import datetime, timezone
+
 from tests.conftest import future_slot, iso
 
 
@@ -26,12 +28,18 @@ def test_create_booking_success(client, room_factory, user_factory):
     user = user_factory()
     start, end = future_slot(hour=10)
 
+    before_create = datetime.now(timezone.utc).replace(tzinfo=None)
     response = _create_booking(client, room["id"], user["id"], start, end)
+    after_create = datetime.now(timezone.utc).replace(tzinfo=None)
     assert response.status_code == 201
     body = response.json()
     assert body["status"] == "CONFIRMED"
     assert body["room_id"] == room["id"]
     assert body["user_id"] == user["id"]
+    # Verifica o contrato público: created_at é UTC sem offset e é gerado ao criar.
+    created_at = datetime.fromisoformat(body["created_at"])
+    assert created_at.tzinfo is None
+    assert before_create <= created_at <= after_create
 
 
 def test_create_booking_room_not_found_returns_404(client, user_factory):

@@ -1,7 +1,7 @@
 """Fixtures compartilhadas: banco SQLite em memória, isolado por teste (ver docs/adr/0002)."""
 from __future__ import annotations
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 import pytest
 from fastapi.testclient import TestClient
@@ -75,7 +75,8 @@ def future_slot(hour: int = 10, duration_hours: int = 1, days_ahead: int = 1):
     """Devolve (start, end) datetimes no futuro, sempre dentro do expediente 08:00-20:00,
     calculados a partir de 'agora' para que os testes nunca fiquem obsoletos (RN05).
     """
-    base_day = (datetime.utcnow() + timedelta(days=days_ahead)).replace(
+    now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
+    base_day = (now_utc + timedelta(days=days_ahead)).replace(
         hour=hour, minute=0, second=0, microsecond=0
     )
     return base_day, base_day + timedelta(hours=duration_hours)

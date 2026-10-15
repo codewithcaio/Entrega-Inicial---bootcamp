@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import enum
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import DateTime, Enum, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -48,7 +48,10 @@ class Booking(Base):
     status: Mapped[BookingStatus] = mapped_column(
         Enum(BookingStatus), nullable=False, default=BookingStatus.CONFIRMED
     )
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    # O contrato armazena UTC sem offset; a geração usa a API atual do Python.
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime, default=lambda: datetime.now(timezone.utc).replace(tzinfo=None)
+    )
 
     room: Mapped["Room"] = relationship(back_populates="bookings")
     user: Mapped["User"] = relationship(back_populates="bookings")

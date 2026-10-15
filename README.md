@@ -11,7 +11,7 @@ criar/cancelar reservas e consultar ocupação/disponibilidade. Documentação i
 | Gabriel Vieira Souza | 22552446 |
 | Caio da Silva Diniz | 22552405 |
 
-Repositório GitHub: **PENDENTE**. O ZIP não comprova branches, Issues, PRs ou revisões.
+Repositório público: [https://github.com/codewithcaio/Entrega-Inicial---bootcamp](https://github.com/codewithcaio/Entrega-Inicial---bootcamp).
 O roteiro está em [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Execução com Docker
@@ -42,9 +42,12 @@ O volume `booking-data` preserva o banco ao encerrar. No Docker, `DATABASE_URL` 
 `sqlite:////app/data/booking.db` para manter o banco dentro do volume; o `.env` personaliza
 `BUSINESS_HOURS_START` e `BUSINESS_HOURS_END`.
 
-**Status desta revisão:** Docker não pôde ser executado neste computador. A configuração foi
-corrigida e existe um job Docker no GitHub Actions; uma execução futura bem-sucedida ainda
-precisa ser obtida e anexada. Não apresente logs Python locais como execução Docker.
+**Execução comprovada em 12/09/2026:** Gabriel Vieira Souza executou o projeto no
+Docker Desktop (Windows/WSL2), com o container `salafacil-api` em estado `Healthy`.
+O harness registrou **78 testes aprovados, 0 falhas, 55 avisos de depreciação, 1,67 s,
+cobertura total de 93,60% (94% arredondado), services 100% e `EXIT_CODE=0`**.
+Os 1,67 s correspondem ao pytest, não ao build. Consulte os
+[logs, metadados e prints](docs/EXECUTION_REPORT.md).
 
 ## Execução local — Windows / PowerShell
 
@@ -90,7 +93,7 @@ Use datas futuras ao experimentar a criação de reservas.
 
 ## Test Harness e evidências
 
-Execução desta revisão: **78 testes passaram**, cobertura total de `app` arredondada em **94%**
+Execução Docker de 12/09/2026: **78 testes passaram**, cobertura total de `app` de **93,60% (94% arredondado)**
 e cobertura de `services` em **100%**. O harness reprova cobertura de services inferior a 80%.
 Veja [o relatório real](docs/EXECUTION_REPORT.md) e [o guia de evidências](evidence/README.md).
 
@@ -99,7 +102,8 @@ ao mesmo arquivo SQLite temporário. Os testes de regressão cobrem offsets de d
 por intervalo e carregamento do `.env`. Warnings presentes nos logs não são falhas de teste.
 
 GitHub Actions tem jobs Python e Docker e publica os respectivos logs como artefatos.
-A mera presença do workflow não comprova que ele já foi executado no GitHub.
+A [execução na main após o PR #24](https://github.com/codewithcaio/Entrega-Inicial---bootcamp/actions/runs/34778178346) terminou com sucesso.
+As métricas detalhadas acima pertencem ao Docker local; não foram inferidas do Actions.
 
 ## Especificação, decisões e assistente de código
 
@@ -109,10 +113,13 @@ A mera presença do workflow não comprova que ele já foi executado no GitHub.
 - [Registro da revisão assistida](evidence/ai/REVISION.md): trabalho realizado nesta conversa.
 - `.claude/CLAUDE.md`, `.cursorrules` e `AGENTS.md`: contexto e regras para assistentes.
 
-O projeto original declara uso de Claude Code. Esta revisão foi assistida pelo Codex no app
-desktop, com execução de comandos no terminal. Isso **não é evidência de uma sessão do Codex CLI**.
-O enunciado aceita ao menos uma ferramenta de auxílio a código. Se o grupo declarar uso de
-Claude Code ou Codex CLI, anexe também a interação real correspondente, sem inventar histórico.
+**Gabriel Vieira Souza utilizou o OpenAI Codex no aplicativo desktop**, com leitura e
+alteração de arquivos e execução de comandos no terminal, para revisar o projeto e atualizar
+a documentação com as evidências reais. Os prints preservam o
+[pedido e resultado no README](evidence/ai/codex-readme.png) e o
+[relatório produzido](evidence/ai/codex-relatorio.png).
+O projeto original declara Claude Code; essa declaração é distinta do uso de Codex aqui
+comprovado. Não se trata de uma sessão do executável Codex CLI.
 
 ## Decisões arquiteturais resumidas
 
@@ -125,6 +132,7 @@ Esta versão suporta SQLite; migrar para outro banco exige revisar a estratégia
 ## Preparação da entrega
 
 Use [SUBMISSION_TEMPLATE.md](docs/SUBMISSION_TEMPLATE.md) como texto-base do PDF.
-Preencha o link e as evidências Docker e links das Issues/PRs reais.
+O modelo reúne o link do repositório, resultados Docker e referências às evidências reais.
+As revisões posteriores dos PRs #1–#7 não constituem aprovação retroativa desses merges.
 Cada integrante deve submeter o PDF conforme o enunciado.
 Veja [CHANGELOG_REVIEW.md](docs/CHANGELOG_REVIEW.md) para as correções e pendências.

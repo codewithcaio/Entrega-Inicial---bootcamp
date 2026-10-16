@@ -189,6 +189,7 @@ Um aprendizado técnico foi manter separadas as medições de cada ambiente:
 | Docker histórico, 12/09/2026 | 78 | 55 | 1,67 s | 93,60% | 0 |
 | Python local após correção de depreciação, 15/10/2026 UTC | 78 | 1 | 1,48 s | 93,60% | 0 |
 | Python local com novos testes de borda, 15/10/2026 UTC | 95 | 1 | 2,12 s | 94,51% | 0 |
+| Docker final, 16/10/2026 UTC | 95 | 1 | 2,16 s | 94,51% | 0 |
 
 Todas essas execuções passaram os testes coletados, mas a contagem e o tempo não
 são intercambiáveis. A cobertura de services foi de 100% nas execuções relatadas;
@@ -206,10 +207,11 @@ explicar o que mudou, como foi validado e o que permanece pendente.
 ## 9. Condições para a entrega final
 
 Este documento cobre comparação, quatro pilares ético-técnicos e relato de
-experiência. Ainda é necessário conferir a execução Docker da versão final
-integrada, vinculada à [Issue #34](https://github.com/codewithcaio/Entrega-Inicial---bootcamp/issues/34),
-e consolidar o PDF com identificação, repositório, resultados atuais e PRs.
-Não se declara aqui que os 95 testes já foram executados no Docker.
+experiência. A execução Docker de 16/10/2026 foi conferida nos quatro arquivos
+do harness: 95 aprovados, um aviso e saída 0. O [relatório](EXECUTION_REPORT.md)
+registra os resultados da Issue #34. Resta revisar/integrar essa atualização,
+conferir a integração final na main e consolidar o PDF com identificação,
+repositório, resultados e PRs.
 
 A escolha de uma licença e a revisão da dependência que mantém um aviso externo
 são melhorias registradas; não foram silenciosamente implementadas nesta tarefa.

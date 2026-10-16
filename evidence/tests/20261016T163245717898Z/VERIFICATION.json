@@ -1,0 +1,17 @@
+{
+  "description": "Cópias dos quatro arquivos fornecidos por Gabriel, preservadas byte a byte. Registro adicional de conferência, não gerado pelo harness.",
+  "sha256": {
+    "pytest.log": "ce08761aac8a87a701b93d799e4e63a659237e4ab66f793e1845f37b914d8f9b",
+    "environment.json": "b2c37eb9359c26379ddfde7a439444d91499be66fe800c043f5c975489396070",
+    "coverage.json": "212eed70ba1d6c4e4f7457449e3be3dcee6d188540087519964478c0657efc2b",
+    "junit.xml": "cffbc83414100e2125e5b171e16987ab2ee078c07821420373946cf21f16bc66"
+  },
+  "source_comparison": {
+    "reference": "develop d329396",
+    "files_compared": 34,
+    "scope": "src, tests, scripts, Dockerfile, docker-compose.yml, requirements.txt, pytest.ini",
+    "normalization": "CRLF e LF considerados equivalentes",
+    "differences": 0
+  },
+  "limits": "O SHA exato não foi capturado pelo harness nem pelo download ZIP; não se trata de atestação da imagem. Não foi reexecutado o Docker pelo agente."
+}

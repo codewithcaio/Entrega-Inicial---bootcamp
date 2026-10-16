@@ -1,8 +1,10 @@
 # Especificação Técnica — SalaFácil (Sistema de Reserva de Salas de Reunião)
 
-Documento de especificação inicial (SDD — Spec-Driven Development). Esta é a versão v1.1,
-usada como contrato para gerar os componentes, os testes e o harness de validação. Alterações
-devem atualizar este documento e ser registradas em `docs/REFINEMENTS.md`.
+Especificação técnica no fluxo SDD (Spec-Driven Development), consolidada para a
+Entrega 2 em 15/10/2026. A versão v1.2 mantém os contratos da v1.1 e acrescenta
+rastreabilidade dos refinamentos e critérios de validação. Não introduz novos
+endpoints nem altera as regras de negócio. Mudanças de contrato devem atualizar
+este documento e ser registradas em [REFINEMENTS.md](REFINEMENTS.md).
 
 ## 1. Visão Geral do Problema
 
@@ -149,12 +151,16 @@ Essa separação existe para permitir testar toda a lógica de negócio (a parte
 mais quebra) sem precisar subir a aplicação HTTP nem o banco — os testes de `booking_service`
 usam apenas objetos Python em memória.
 
-## 7. Critérios de Aceite da Fase (Entrega 1)
+## 7. Critérios de aceite originais (Entrega 1)
 
-- [ ] Endpoints de `rooms`, `users` e `bookings` implementados conforme contratos acima.
-- [ ] RN01–RN07 cobertas por teste automatizado (ver `docs/EXECUTION_REPORT.md`).
-- [ ] `docker-compose up` sobe a API em `http://localhost:8000/docs` sem passos manuais extras.
-- [ ] Suíte de testes roda com `./scripts/run_tests.sh` e todos os testes passam.
+Os critérios abaixo são preservados como requisitos da primeira fase, sem tratar
+o checkbox antigo como evidência de homologação. Os resultados observados estão
+nos relatórios de execução; a homologação depende da revisão humana correspondente.
+
+- Endpoints de salas, usuários e reservas conforme os contratos da seção 5.
+- RN01-RN07 cobertas por testes automatizados.
+- Docker Compose sobe a API em `http://localhost:8000/docs`.
+- Harness executa todos os testes e preserva os resultados e o código de saída.
 
 ## 8. Contratos complementares da v1.1
 
@@ -168,3 +174,45 @@ usam apenas objetos Python em memória.
 - O banco suportado nesta versão é SQLite. A migração requer nova decisão de concorrência.
 - O harness é `python scripts/run_tests.py`; gera logs, JUnit e cobertura de toda `app`,
   verifica a meta de 80% para services e preserva código de saída não zero em caso de falha.
+
+## 9. Rastreabilidade e validação da Entrega 2 (v1.2)
+
+O ciclo de refinamento parte de uma falha observada, uma ambiguidade ou um feedback
+da equipe. A decisão deve ser explicitada antes de ajustar o contrato; depois são
+atualizados implementação e testes, seguidos da execução e revisão humana do PR.
+O histórico detalhado está em [REFINEMENTS.md](REFINEMENTS.md).
+
+| Contrato | Decisão consolidada | Referência de teste |
+|---|---|---|
+| RN01 / RF05 | Intervalos semiabertos; reservas adjacentes não conflitam | `test_booking_conflicts.py::TestHasConflict`; `test_entrega2_edges.py::test_adjacent_bookings_leave_no_false_gap` |
+| RN02 | Duração mínima de 15 minutos e máxima de 8 horas, ambas inclusivas | `test_entrega2_edges.py::test_api_accepts_exact_duration_limits`; `test_api_rejects_invalid_duration_without_persisting` |
+| RN03 | Início e fim no expediente do mesmo dia | `test_edge_cases.py::test_booking_ending_after_business_hours_rejected`; `test_booking_conflicts.py::TestValidateBusinessHours` |
+| RN04 | Participantes entre 1 e a capacidade da sala, inclusive | `test_entrega2_edges.py::test_api_accepts_exact_room_capacity`; `test_bookings.py::test_create_booking_exceeding_capacity_returns_422` |
+| RN05 | Recusar início no passado, comparando instantes UTC | `test_edge_cases.py::test_booking_in_the_past_rejected`; `test_revision.py::test_offset_dates_are_normalized_and_conflict` |
+| RN06 / RF08 | Cancelamento idempotente; registro permanece no histórico e libera a disponibilidade | `test_entrega2_edges.py::test_cancel_restores_availability_without_other_room_interference`; `test_user_history_keeps_cancelled_and_excludes_other_users` |
+| RN07 | Validação estrutural antes da busca; entidades ausentes antes das regras de negócio | `test_entrega2_edges.py::test_structural_validation_precedes_missing_entity`; `test_missing_entity_precedes_business_rule_validation` |
+| RF09 | Dia ou intervalo inclusivo; rejeitar filtros ausentes, misturados ou invertidos | `test_revision.py::test_range_includes_both_dates_excludes_cancelled_and_other_rooms`; `test_invalid_range_rejected` |
+| RF11 | Apenas reservas confirmadas da sala afetam a disponibilidade | `test_entrega2_edges.py::test_full_business_day_has_no_availability`; `test_cancel_restores_availability_without_other_room_interference` |
+| Configuração e concorrência | `.env` respeita precedência; escrita adquire lock antes da decisão | `test_revision.py::test_dotenv_loaded_and_explicit_environment_wins`; `test_concurrent_booking_only_one_confirmed` |
+
+### Evidências e critérios de aceitação
+
+- Todos os testes executados devem passar, sem ocultar falhas ou avisos.
+- A meta RNF04 permanece 80% de cobertura de serviços. Passagem de 100% dos testes
+  não significa cobertura de 100% do código.
+- O relatório de [testes de borda](TESTES_BORDA_ENTREGA2.md) registra uma execução
+  local com 95/95 aprovados, cobertura total de 94,51% e serviços em 100%.
+- As mudanças de depreciação preservam UTC sem offset e a geração de `created_at`
+  por inserção; ver [comparativo](AVISOS_DEPRECACAO.md).
+- Os 17 testes novos passaram na implementação existente. Eles ampliam a validação,
+  mas não demonstram, por si, uma nova falha lógica ou mudança de requisito.
+- A execução Docker final da versão integrada deve ser registrada na Issue #34.
+  Resultados locais e resultados Docker devem ser identificados separadamente.
+- Cada PR deve indicar escopo, critérios de aceitação, validação e revisão do outro
+  integrante antes do merge. Não há aprovação retroativa dos PRs originais #1-#7.
+
+### Limites preservados
+
+Autenticação/autorização real, recorrência, notificações e múltiplos escritórios
+continuam fora do escopo definido na seção 1. A aprovação da suíte não é evidência
+de segurança para exposição pública, de teste de carga ou de ausência total de bugs.

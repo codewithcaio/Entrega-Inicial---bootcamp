@@ -34,12 +34,14 @@ e o preenchimento do PDF. Essas anotações descrevem 11/09, não o estado atual
 - PR #37: sincronização de main para develop.
 - Issue #28 / PR #38: 17 casos adicionais; execução local com 95 aprovados,
   cobertura de 94,51% e serviços em 100%. Ver [relatório](TESTES_BORDA_ENTREGA2.md).
-- Issue #29: consolidação documental da SPEC v1.2 e do loop de refinamentos.
+- Issue #29 / PR #40: consolidação documental da SPEC v1.2 e do loop de refinamentos.
+- Issue #30 / PR #41: README final, arquitetura e diagrama de fluxo.
+- Issue #31: [comparação, análise ético-técnica e experiência](RELATORIO_ETICO_TECNICO.md),
+  preparada com separação entre uso observado, declaração original e pesquisa documental.
 
 ## Itens ainda necessários para consolidar a Entrega 2
 
-- README final com diagrama de fluxo (Issue #30).
-- Comparação de ferramentas, análise ético-técnica e experiência do grupo (Issue #31).
+- Revisão e integração do relatório da Issue #31; a preparação local não equivale ao merge.
 - Execução final do harness Docker e atualização do relatório na versão integrada (Issue #34).
 - Revisão dos PRs, integração final e PDF consolidado da Entrega 2.
 

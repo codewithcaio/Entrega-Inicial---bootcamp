@@ -201,8 +201,10 @@ evidências como artefatos. Conferir o resultado de cada PR em Checks.
 inspecionar/alterar arquivos, executar testes e preparar documentos. As capturas
 do [README](evidence/ai/codex-readme.png) e do
 [relatório](evidence/ai/codex-relatorio.png) documentam uma interação real.
-O material original declara Claude Code; essa declaração é distinta das capturas
-de Codex desktop e não comprova uso do executável Codex CLI.
+**Caio da Silva Diniz utilizou Claude Code**, conforme informado pelo grupo.
+Essa informação complementa o ADR original; esta atualização não inclui uma
+captura ou log da sessão de Caio. As capturas de Codex desktop não comprovam
+uso do executável Codex CLI.
 
 O contexto dos assistentes inclui SPEC, refinamentos, ADRs e `AGENTS.md`. O fluxo
 exige branches, PRs, validação automática e revisão do outro integrante antes do
@@ -212,6 +214,10 @@ tiveram aprovação formal prévia registrada; revisões posteriores não são r
 A [análise comparativa e ético-técnica](docs/RELATORIO_ETICO_TECNICO.md) reúne
 a comparação das ferramentas, os riscos, os controles e o relato de experiência
 da Issue #31. O texto distingue uso comprovado de pesquisa documental.
+
+O grupo declara participação conjunta e equilibrada. O
+[registro de colaboração](docs/COLABORACAO_ENTREGA2.md) apresenta os relatos
+individuais, os autores e revisores dos PRs e os desvios de processo observados.
 
 ## Mapa da documentação e submissão
 

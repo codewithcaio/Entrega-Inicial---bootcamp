@@ -20,10 +20,11 @@ A análise combina evidências do projeto com documentação oficial consultada 
   As capturas [README](../evidence/ai/codex-readme.png) e
   [relatório](../evidence/ai/codex-relatorio.png), os arquivos preparados e os
   logs registram atividades de inspeção, edição, testes e documentação.
-- **Declaração original:** o [ADR-0004](adr/0004-uso-de-agente-ia.md) registra
-  Claude Code e seu contexto. Essa declaração não equivale a uma sessão observada
-  nesta revisão. A presença de configurações para um assistente também não
-  comprova que ele foi executado.
+- **Uso informado pelo grupo:** Caio utilizou Claude Code como apoio ao trabalho,
+  conforme declaração dos integrantes. O [ADR-0004](adr/0004-uso-de-agente-ia.md)
+  registra a escolha original. Esta atualização identifica o integrante e a
+  ferramenta, mas não acrescenta uma captura ou log da sessão de Caio.
+  A presença de configurações isoladamente não comprova execução.
 - **Avaliação documental:** Codex CLI, Cursor e Antigravity foram comparados por
   suas documentações. Não há experimento equivalente registrado com essas três
   ferramentas no SalaFácil. Codex desktop e Codex CLI são interfaces distintas;
@@ -38,7 +39,7 @@ projeto. Recursos e permissões variam por versão, plataforma, conta e configur
 | Ferramenta e base da análise | Pontos fortes para o fluxo SDD | Limitações e cuidado necessário | Impacto demonstrado no SalaFácil |
 |---|---|---|---|
 | **OpenAI Codex desktop — uso comprovado por Gabriel** | Na interação registrada, reuniu inspeção de arquivos, alterações, execução de testes e preparação de documentação. Permitiu confrontar requisitos com resultados concretos. | A resposta do agente precisa ser conferida nos arquivos e logs. Orientações de upload e escolha da branch exigiram acompanhamento humano; gerar um documento não comprova publicação ou aprovação. | Apoio à revisão inicial e às correções/documentação da Entrega 2. Os resultados das seções 3 e 7 são observações do processo, sem atribuição causal exclusiva ao modelo. |
-| **Claude Code — declaração original e pesquisa documental** | O projeto já registra contexto para o agente e uma decisão de arquitetura sobre seu uso. A documentação descreve modos de permissão e isolamento que podem apoiar trabalho sobre o repositório. | O efeito das proteções depende do modo e da configuração. Permissão para executar uma ação não comprova que ela está correta. Não foi observada uma sessão original para comparar qualidade ou produtividade. | Escolha declarada no ADR-0004. Contribuição por arquivo, taxa de acerto e desempenho não foram medidos. Fonte: [segurança do Claude Code](https://code.claude.com/docs/en/security). |
+| **Claude Code — uso informado por Caio e pesquisa documental** | O projeto já registra contexto para o agente e uma decisão de arquitetura sobre seu uso. A documentação descreve modos de permissão e isolamento que podem apoiar trabalho sobre o repositório. | O efeito das proteções depende do modo e da configuração. Permissão para executar uma ação não comprova que ela está correta. Não foi observada uma sessão original para comparar qualidade ou produtividade. | Uso por Caio informado pelo grupo, além da escolha no ADR-0004. Não há sessão anexada nem medição de contribuição por arquivo, taxa de acerto ou desempenho. Fonte: [segurança do Claude Code](https://code.claude.com/docs/en/security). |
 | **Codex CLI — pesquisa documental** | Permite inspecionar, editar e executar comandos pelo terminal; pode incorporar instruções do projeto e integrar tarefas ao fluxo de desenvolvimento. | Requer familiaridade com terminal e conferência de mudanças e comandos. A documentação de capacidade não demonstra o resultado que teria neste projeto. | Não houve sessão do executável CLI comprovada nesta revisão; não se transferem automaticamente as evidências do aplicativo. Fonte: [Codex CLI](https://developers.openai.com/codex/cli/). |
 | **Cursor — pesquisa documental** | Integra assistência à edição e ao contexto do projeto; a documentação descreve revisão de ações sensíveis e controle de acesso a arquivos. | Edições e comandos podem produzir efeitos antes de uma revisão completa, dependendo da configuração e de processos que recarregam arquivos. As aprovações não eliminam alucinação ou injeção de instruções. | Não há sessão prática comprovada. O arquivo `.cursorrules` é contexto disponível, não prova de utilização. Fonte: [Agent Security](https://cursor.com/docs/agent/security). |
 | **Antigravity — pesquisa documental** | Os planos e artefatos tornam a proposta do agente inspecionável antes da execução; a política de revisão permite organizar pontos de intervenção humana. | A política selecionada altera quando o agente pausa. Um plano legível ainda pode conter premissas erradas e precisa ser comparado à especificação e ao diff. | Não há execução registrada no SalaFácil. O benefício descrito é potencial, sem métrica prática atribuída. Fonte: [Artifact review](https://antigravity.google/docs/artifact-review). |
@@ -61,6 +62,15 @@ a aceitação dependeu dos contratos, testes, revisão e evidências.
 | Depreciação de `utcnow` | [Comparativo](AVISOS_DEPRECACAO.md): 78 testes aprovados; avisos de 55 para 1 após a correção. | O aviso externo restante foi declarado. Ocultar avisos não seria corrigir a origem do problema. |
 | Novos cenários de borda | [Relatório](TESTES_BORDA_ENTREGA2.md): 17 casos adicionais, total de 95 aprovados. | Os novos casos passaram na implementação existente; não comprovam a descoberta de 17 defeitos. A ampliação fortalece a verificação, sem provar ausência de erros. |
 | Documentação e publicação | Houve correção de links para o local efetivo dos logs e sincronização de branches pelos PRs #37 e #39. | A orientação textual e o arquivo local não bastam: caminho publicado, branch de destino e conteúdo final precisam de conferência. |
+
+Dois casos de orientação de agente também ilustram limites reais: o
+[PR #27](https://github.com/codewithcaio/Entrega-Inicial---bootcamp/pull/27)
+propôs um template quando já havia um no repositório e foi fechado sem merge;
+os PRs #36 e #38 foram direcionados à main, embora o fluxo previsse develop,
+e exigiram sincronização posterior. São erros de inspeção e orientação de
+processo, não novos defeitos lógicos detectados pelos testes. O
+[registro de colaboração](COLABORACAO_ENTREGA2.md) detalha a ocorrência e o
+aprendizado de verificar arquivos existentes e a branch de destino.
 
 Esses casos não constituem comparação experimental entre modelos. Não foi medida
 a quantidade de defeitos produzidos por cada ferramenta nem a produtividade sem IA.
@@ -168,19 +178,17 @@ homologação, mesmo quando o agente executa ferramentas ou os checks passam.
 
 ## 8. Relato sintético da experiência
 
-Este relato resume fatos registrados no desenvolvimento; não atribui falas,
-sentimentos, horas trabalhadas ou uso de ferramentas não comprovados aos integrantes.
+Gabriel e Caio declaram participação conjunta e equilibrada na Entrega 2.
+As frentes de contribuição e os relatos individuais estão no
+[registro de colaboração](COLABORACAO_ENTREGA2.md), que também identifica
+Autor e Revisor de cada PR. A publicação concentrada na conta de Gabriel
+não é usada como medida automática da participação na elaboração do trabalho.
 
-O trabalho partiu de uma API com especificação, ADRs e harness de testes. A revisão
-assistida ajudou a relacionar contratos de datas, validação e concorrência ao
-código e a transformar resultados de execução em documentação rastreável. Na
-Entrega 2, o foco foi consolidar decisões, reduzir depreciações e reforçar os
-cenários de borda, preservando os limites do problema original.
-
-Gabriel conduziu a interação comprovada com o Codex desktop e as etapas manuais
-de publicação. Os PRs registram a participação de revisão de Caio nos trabalhos
-referenciados; essa revisão precisa ser avaliada pelo seu conteúdo e escopo, sem
-inferir que todo trecho do projeto foi novamente auditado.
+Gabriel destaca a execução Docker, o uso do Codex desktop e o aprendizado de
+conferir logs, cobertura e branch de destino. Caio destaca a atuação conjunta,
+o uso informado de Claude Code e a responsabilidade pela revisão registrada
+no GitHub. O grupo aprendeu que checks aprovados não substituem a conferência
+dos contratos nem garantem que o fluxo de publicação foi seguido corretamente.
 
 Um aprendizado técnico foi manter separadas as medições de cada ambiente:
 
@@ -204,19 +212,17 @@ foi útil para preparar material, mas as dificuldades nesses passos mostram que
 orientações precisam ser concretas e verificáveis. A comunicação em equipe deve
 explicar o que mudou, como foi validado e o que permanece pendente.
 
-## 9. Condições para a entrega final
+## 9. Síntese da análise
 
-Este documento cobre comparação, quatro pilares ético-técnicos e relato de
-experiência. A execução Docker de 16/10/2026 foi conferida nos quatro arquivos
-do harness: 95 aprovados, um aviso e saída 0. O [relatório](EXECUTION_REPORT.md)
-registra os resultados da Issue #34. Resta revisar/integrar essa atualização,
-conferir a integração final na main e consolidar o PDF com identificação,
-repositório, resultados e PRs.
+A execução Docker de 16/10/2026 obteve 95 aprovados, um aviso e saída 0,
+conferidos nos quatro arquivos do harness. Os PRs #43 e #44 integraram as
+evidências e a Entrega 2; o PR #46 publicou a correção do link dos ADRs.
 
-A escolha de uma licença e a revisão da dependência que mantém um aviso externo
-são melhorias registradas; não foram silenciosamente implementadas nesta tarefa.
-A revisão deste relatório deve conferir fatos, links, limites das conclusões e
-adequação ao enunciado, além da clareza do texto.
+A experiência mostra que a contribuição da IA precisa ser avaliada por
+contratos, testes, inspeção e revisão humana. As limitações registradas incluem
+o aviso externo de Starlette/AnyIO, a ausência de benchmark entre ferramentas,
+a definição de licença ainda não realizada e as falhas históricas de governança.
+Esses limites não são ocultados por uma suíte aprovada.
 
 ## 10. Referências e evidências
 

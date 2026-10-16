@@ -38,3 +38,17 @@ limites da evidência: Claude Code é declarado nos documentos originais; Codex 
 Cursor e Antigravity não possuem experimento equivalente registrado nesta revisão.
 O relatório da Issue #31 foi preparado localmente e depende de revisão e integração
 por PR. Não se declara aprovação humana apenas pela geração deste documento.
+
+## Complemento de colaboração e transparência — 16/10/2026
+
+O grupo informou participação conjunta e equilibrada e identificou o uso de
+Claude Code por Caio da Silva Diniz. Essa declaração não acrescenta uma captura
+ou log de sessão da ferramenta. Gabriel permanece identificado como usuário
+do Codex desktop; não se declara uso do binário Codex CLI.
+
+O [registro de colaboração](../../docs/COLABORACAO_ENTREGA2.md) distingue a
+contribuição conjunta declarada das contas autoras/revisoras efetivamente
+registradas, incluindo o PR #39 com comentário sem aprovação formal.
+Os PRs #27, #36 e #38 exemplificam a necessidade de conferir o repositório e
+as instruções de processo dos agentes. Não se atribui uma métrica de qualidade
+ou produtividade às ferramentas sem experimento equivalente.

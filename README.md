@@ -208,9 +208,9 @@ exige branches, PRs, validação automática e revisão do outro integrante ante
 merge, conforme [CONTRIBUTING.md](CONTRIBUTING.md). Os PRs iniciais #1-#7 não
 tiveram aprovação formal prévia registrada; revisões posteriores não são retroativas.
 
-A comparação de ferramentas, análise ético-técnica e experiência do grupo compõem
-a [Issue #31](https://github.com/codewithcaio/Entrega-Inicial---bootcamp/issues/31).
-As análises devem distinguir uso comprovado de pesquisa documental.
+A [análise comparativa e ético-técnica](docs/RELATORIO_ETICO_TECNICO.md) reúne
+a comparação das ferramentas, os riscos, os controles e o relato de experiência
+da Issue #31. O texto distingue uso comprovado de pesquisa documental.
 
 ## Mapa da documentação e submissão
 

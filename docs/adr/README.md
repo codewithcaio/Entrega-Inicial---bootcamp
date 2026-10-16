@@ -37,7 +37,7 @@ Consolidação documental: 15/10/2026.
 
 O ADR-0004 preserva a escolha declarada no material original: Claude Code. A revisão
 posterior registra o uso do **OpenAI Codex no aplicativo desktop por Gabriel Vieira
-Souza**, com evidências no [README do projeto](../../README.md#especificação-decisões-e-assistente-de-código)
+Souza**, com evidências no [README do projeto](../../README.md#uso-de-ia-e-revisão-humana)
 e no [relatório de execução](../EXECUTION_REPORT.md#5-uso-do-openai-codex).
 São registros distintos; as capturas do aplicativo desktop não são evidência de
 uma sessão do executável Codex CLI.

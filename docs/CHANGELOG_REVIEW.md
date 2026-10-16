@@ -39,11 +39,18 @@ e o preenchimento do PDF. Essas anotações descrevem 11/09, não o estado atual
 - Issue #31 / PR #42: [comparação, análise ético-técnica e experiência](RELATORIO_ETICO_TECNICO.md),
   preparada com separação entre uso observado, declaração original e pesquisa documental.
 
-## Itens ainda necessários para consolidar a Entrega 2
+## Fechamento e complementos documentais
 
-- Revisão e integração da documentação/evidências da Issue #34: execução Docker
-  conferida em 16/10, com 95 aprovados, 1 aviso, 2,16 s e saída 0.
-- Revisão dos PRs, integração final e PDF consolidado da Entrega 2.
+- PR #43: evidências Docker de 16/10/2026, com 95 aprovados, 1 aviso e saída 0.
+- PR #44: integração da Entrega 2 na main, com revisão e checks anteriores ao merge.
+- PRs #45 e #46: correção do link dos ADRs e integração na main.
+- Complemento atual: participação conjunta declarada, uso informado de Claude
+  Code por Caio, relatos individuais e tabela Autor/Revisor em
+  [COLABORACAO_ENTREGA2.md](COLABORACAO_ENTREGA2.md).
 
-Não se exige nova funcionalidade fora da SPEC para substituir esses itens de documentação,
-validação e análise crítica. As contagens de testes são vinculadas às execuções indicadas.
+O PR #39 tem comentário anterior ao merge, sem APPROVED registrado. Os PRs #36
+e #38 entraram na main fora do fluxo previsto e foram sincronizados depois.
+Esses registros são preservados, sem apresentar aprovações posteriores como retroativas.
+
+Este complemento altera apenas a documentação e ainda depende de seu PR e
+revisão humana. O PDF será atualizado depois da integração dessas alterações.

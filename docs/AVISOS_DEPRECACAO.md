@@ -71,14 +71,17 @@ Starlette 0.38.6, AnyIO 4.15.1, SQLAlchemy 2.0.35, pytest 8.3.3 e pytest-cov 5.0
 As dependências transitivas podem variar em outra instalação; por isso a contagem
 de avisos deve ser conferida também no CI e na execução Docker final.
 
-- Antes: [log](../evidence/tests/20261015T232801169073Z/pytest.log),
-  [ambiente](../evidence/tests/20261015T232801169073Z/environment.json),
-  [cobertura](../evidence/tests/20261015T232801169073Z/coverage.json) e
-  [JUnit](../evidence/tests/20261015T232801169073Z/junit.xml).
-- Depois: [log](../evidence/tests/20261015T232828776932Z/pytest.log),
-  [ambiente](../evidence/tests/20261015T232828776932Z/environment.json),
-  [cobertura](../evidence/tests/20261015T232828776932Z/coverage.json) e
-  [JUnit](../evidence/tests/20261015T232828776932Z/junit.xml).
+As evidências desta comparação foram publicadas em `tests/<data-hora>/`.
+Os links abaixo apontam para esse local real; o conteúdo dos logs não foi alterado.
+
+- Antes: [log](../tests/20261015T232801169073Z/pytest.log),
+  [ambiente](../tests/20261015T232801169073Z/environment.json),
+  [cobertura](../tests/20261015T232801169073Z/coverage.json) e
+  [JUnit](../tests/20261015T232801169073Z/junit.xml).
+- Depois: [log](../tests/20261015T232828776932Z/pytest.log),
+  [ambiente](../tests/20261015T232828776932Z/environment.json),
+  [cobertura](../tests/20261015T232828776932Z/coverage.json) e
+  [JUnit](../tests/20261015T232828776932Z/junit.xml).
 
 ## Referências técnicas
 

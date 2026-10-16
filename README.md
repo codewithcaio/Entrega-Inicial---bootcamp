@@ -175,6 +175,7 @@ consequências e status. O teste concorrente não é um teste de carga.
 | Docker por Gabriel, 12/09/2026 | 78/78 aprovados; 55 avisos; saída 0 | 93,60% | 100% | [Relatório Docker](docs/EXECUTION_REPORT.md) |
 | Python local após Issue #32, 15/10/2026 | 78/78 aprovados; 1 aviso; saída 0 | 93,60% | 100% | [Comparativo](docs/AVISOS_DEPRECACAO.md) |
 | Python local após Issue #28, 15/10/2026 | 95/95 aprovados; 1 aviso; saída 0 | 94,51% | 100% | [Testes de borda](docs/TESTES_BORDA_ENTREGA2.md) |
+| Docker final por Gabriel, 16/10/2026 | 95/95 aprovados; 1 aviso; saída 0; 2,16 s | 94,51% | 100% | [Execução final](docs/EXECUTION_REPORT.md) |
 
 95/95 significa **100% de passagem**, não 100% de cobertura. O harness exige ao
 menos 80% de cobertura em serviços (RNF04). Avisos e tempos pertencem às execuções
@@ -185,10 +186,10 @@ independentes ao mesmo arquivo SQLite. Os 17 casos novos verificam limites,
 prioridade de validação, ausência de persistência em erro, cancelamento e isolamento.
 O aviso externo de Starlette/AnyIO permanece nos logs.
 
-A execução Docker final da Entrega 2 pertence à
-[Issue #34](https://github.com/codewithcaio/Entrega-Inicial---bootcamp/issues/34).
-Os resultados locais de 95 testes não devem ser atribuídos a uma execução Docker
-que ainda não foi registrada.
+A execução Docker final da Entrega 2 foi realizada por Gabriel em 16/10/2026:
+95 aprovados, nenhuma falha ou erro, um aviso externo e saída 0. O
+[relatório](docs/EXECUTION_REPORT.md) reúne log, metadados, JUnit, cobertura e
+capturas. Os tempos das execuções locais e Docker são registrados separadamente.
 
 O [GitHub Actions](https://github.com/codewithcaio/Entrega-Inicial---bootcamp/actions)
 executa `test` e `docker-test` em pushes e PRs para `develop` e `main`, publicando
@@ -214,6 +215,7 @@ da Issue #31. O texto distingue uso comprovado de pesquisa documental.
 
 ## Mapa da documentação e submissão
 
+- [Roteiro da submissão da Entrega 2](docs/SUBMISSION_ENTREGA2.md).
 - [SPEC](docs/SPEC.md): requisitos, contratos, limites e critérios da Entrega 2.
 - [REFINEMENTS](docs/REFINEMENTS.md): problemas, decisões e loop de re-especificação.
 - [ADRs](docs/adr/README.md): decisões de arquitetura e trade-offs.

@@ -36,13 +36,13 @@ e o preenchimento do PDF. Essas anotações descrevem 11/09, não o estado atual
   cobertura de 94,51% e serviços em 100%. Ver [relatório](TESTES_BORDA_ENTREGA2.md).
 - Issue #29 / PR #40: consolidação documental da SPEC v1.2 e do loop de refinamentos.
 - Issue #30 / PR #41: README final, arquitetura e diagrama de fluxo.
-- Issue #31: [comparação, análise ético-técnica e experiência](RELATORIO_ETICO_TECNICO.md),
+- Issue #31 / PR #42: [comparação, análise ético-técnica e experiência](RELATORIO_ETICO_TECNICO.md),
   preparada com separação entre uso observado, declaração original e pesquisa documental.
 
 ## Itens ainda necessários para consolidar a Entrega 2
 
-- Revisão e integração do relatório da Issue #31; a preparação local não equivale ao merge.
-- Execução final do harness Docker e atualização do relatório na versão integrada (Issue #34).
+- Revisão e integração da documentação/evidências da Issue #34: execução Docker
+  conferida em 16/10, com 95 aprovados, 1 aviso, 2,16 s e saída 0.
 - Revisão dos PRs, integração final e PDF consolidado da Entrega 2.
 
 Não se exige nova funcionalidade fora da SPEC para substituir esses itens de documentação,

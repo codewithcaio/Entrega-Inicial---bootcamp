@@ -177,6 +177,7 @@ consequências e status. O teste concorrente não é um teste de carga.
 | Python local após Issue #32, 15/10/2026 | 78/78 aprovados; 1 aviso; saída 0 | 93,60% | 100% | [Comparativo](docs/AVISOS_DEPRECACAO.md) |
 | Python local após Issue #28, 15/10/2026 | 95/95 aprovados; 1 aviso; saída 0 | 94,51% | 100% | [Testes de borda](docs/TESTES_BORDA_ENTREGA2.md) |
 | Docker da Entrega 2 por Gabriel, 16/10/2026 | 95/95 aprovados; 1 aviso; saída 0; 2,16 s | 94,51% | 100% | [Execução final](docs/EXECUTION_REPORT.md) |
+| Docker da Entrega 3 por Gabriel, 23/10/2026 | 95/95 aprovados; 1 aviso; saída 0; 2,19 s | 94,51% | 100% | [Relatório da Entrega 3](docs/EXECUTION_REPORT_ENTREGA3.md) |
 
 95/95 significa **100% de passagem**, não 100% de cobertura. O harness exige ao
 menos 80% de cobertura em serviços (RNF04). Avisos e tempos pertencem às execuções
@@ -195,6 +196,12 @@ capturas. Os tempos das execuções locais e Docker são registrados separadamen
 O [GitHub Actions](https://github.com/codewithcaio/Entrega-Inicial---bootcamp/actions)
 executa `test` e `docker-test` em pushes e PRs para `develop` e `main`, publicando
 evidências como artefatos. Conferir o resultado de cada PR em Checks.
+
+A execução Docker da Entrega 3, em 23/10/2026, aprovou 95/95 testes em 2,19 s,
+com um aviso e saída 0. A validação manual também confirmou criação de reserva,
+bloqueio de conflito e liberação da disponibilidade após cancelamento. Consulte o
+[relatório da Entrega 3](docs/EXECUTION_REPORT_ENTREGA3.md) para os arquivos brutos,
+cobertura por módulo e resultados observados no Swagger.
 
 ## Uso de IA e revisão humana
 
@@ -234,5 +241,6 @@ individuais, os autores e revisores dos PRs e os desvios de processo observados.
 
 O PDF de encerramento da Entrega 3 reúne integrantes/RA, link da release, resultados
 da execução final e cobertura, vídeo de 3 a 5 minutos e retrospectiva do grupo.
-Os resultados acima são históricos; a homologação da release exige nova execução
-identificada pelo commit final e aprovação humana registrada.
+A execução de 23/10/2026 está registrada no relatório da Entrega 3. O fechamento
+da release deve conferir a correspondência com o código publicado, os checks do
+commit final e a aprovação humana registrada.

@@ -1,7 +1,7 @@
 # SalaFácil - API de reserva de salas
 
 Projeto do Bootcamp III, desenvolvido no fluxo SDD (Spec-Driven Development).
-A Entrega 2 consolida a API, testes de borda, refinamentos e decisões técnicas.
+A Entrega 3 consolida a solução final, a especificação As-Built e a preparação da release v1.0.0.
 A aplicação centraliza reservas de salas de reunião, evitando sobreposição de
 horários, excesso de participantes e reservas fora do expediente.
 
@@ -24,7 +24,7 @@ Repositório: [codewithcaio/Entrega-Inicial---bootcamp](https://github.com/codew
 - Consultar intervalos disponíveis de uma sala.
 
 A interface para experimentar a API é o Swagger em `/docs`. Os contratos estão
-na [SPEC v1.2](docs/SPEC.md). Autenticação/autorização real, notificações, recorrência
+na [SPEC As-Built](docs/SPEC.md). Autenticação/autorização real, notificações, recorrência
 e múltiplos escritórios permanecem fora do escopo. Informar um ID de usuário não
 comprova sua identidade nem implementa controle de acesso.
 
@@ -39,8 +39,9 @@ git clone https://github.com/codewithcaio/Entrega-Inicial---bootcamp.git
 cd Entrega-Inicial---bootcamp
 ```
 
-Para acompanhar as mudanças da Entrega 2 antes da integração final, selecionar
-`develop`. Conferir a branch e o commit ao comparar código e evidências.
+Para usar a versão integrada, selecionar `main`. Após a publicação da release,
+selecionar a tag `v1.0.0` para reproduzir exatamente essa versão. A declaração de
+versão da API não substitui a publicação da tag. Conferir o commit ao comparar evidências.
 Opcionalmente, copiar `.env.example` para `.env` para personalizar o expediente.
 Com os valores padrão, na raiz do projeto:
 
@@ -175,7 +176,7 @@ consequências e status. O teste concorrente não é um teste de carga.
 | Docker por Gabriel, 12/09/2026 | 78/78 aprovados; 55 avisos; saída 0 | 93,60% | 100% | [Relatório Docker](docs/EXECUTION_REPORT.md) |
 | Python local após Issue #32, 15/10/2026 | 78/78 aprovados; 1 aviso; saída 0 | 93,60% | 100% | [Comparativo](docs/AVISOS_DEPRECACAO.md) |
 | Python local após Issue #28, 15/10/2026 | 95/95 aprovados; 1 aviso; saída 0 | 94,51% | 100% | [Testes de borda](docs/TESTES_BORDA_ENTREGA2.md) |
-| Docker final por Gabriel, 16/10/2026 | 95/95 aprovados; 1 aviso; saída 0; 2,16 s | 94,51% | 100% | [Execução final](docs/EXECUTION_REPORT.md) |
+| Docker da Entrega 2 por Gabriel, 16/10/2026 | 95/95 aprovados; 1 aviso; saída 0; 2,16 s | 94,51% | 100% | [Execução final](docs/EXECUTION_REPORT.md) |
 
 95/95 significa **100% de passagem**, não 100% de cobertura. O harness exige ao
 menos 80% de cobertura em serviços (RNF04). Avisos e tempos pertencem às execuções
@@ -222,7 +223,8 @@ individuais, os autores e revisores dos PRs e os desvios de processo observados.
 ## Mapa da documentação e submissão
 
 - [Roteiro da submissão da Entrega 2](docs/SUBMISSION_ENTREGA2.md).
-- [SPEC](docs/SPEC.md): requisitos, contratos, limites e critérios da Entrega 2.
+- [SPEC As-Built](docs/SPEC.md): arquitetura, APIs, contratos e limites implementados.
+- [Fechamento da Entrega 3](docs/ENTREGA3_CHECKLIST.md): homologação, release e demonstração.
 - [REFINEMENTS](docs/REFINEMENTS.md): problemas, decisões e loop de re-especificação.
 - [ADRs](docs/adr/README.md): decisões de arquitetura e trade-offs.
 - [Histórico das correções](docs/CHANGELOG_REVIEW.md).
@@ -230,6 +232,7 @@ individuais, os autores e revisores dos PRs e os desvios de processo observados.
 - [Inspeção e testes de borda](docs/TESTES_BORDA_ENTREGA2.md).
 - [Evidências](evidence/README.md): arquivos brutos e capturas por execução.
 
-Consolidar o PDF da Entrega 2 com integrantes/RA, repositório, execução final,
-análise de IA, experiência do grupo e PRs relevantes. Cada integrante deve enviar
-o PDF conforme o enunciado da disciplina.
+O PDF de encerramento da Entrega 3 reúne integrantes/RA, link da release, resultados
+da execução final e cobertura, vídeo de 3 a 5 minutos e retrospectiva do grupo.
+Os resultados acima são históricos; a homologação da release exige nova execução
+identificada pelo commit final e aprovação humana registrada.

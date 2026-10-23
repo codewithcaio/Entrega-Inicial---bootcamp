@@ -1,10 +1,10 @@
 # Especificação Técnica — SalaFácil (Sistema de Reserva de Salas de Reunião)
 
-Especificação técnica no fluxo SDD (Spec-Driven Development), consolidada para a
-Entrega 2 em 15/10/2026. A versão v1.2 mantém os contratos da v1.1 e acrescenta
-rastreabilidade dos refinamentos e critérios de validação. Não introduz novos
-endpoints nem altera as regras de negócio. Mudanças de contrato devem atualizar
-este documento e ser registradas em [REFINEMENTS.md](REFINEMENTS.md).
+Especificação As-Built — revisão documental de 23/10/2026 para a Entrega 3.
+Descreve a implementação da API que declara versão 1.0.0, preservando os contratos
+da SPEC v1.2. A publicação da release e a homologação são registradas separadamente:
+este documento não afirma que a tag já existe ou que novos testes foram executados.
+Mudanças de contrato devem atualizar este documento e [REFINEMENTS.md](REFINEMENTS.md).
 
 ## 1. Visão Geral do Problema
 
@@ -89,7 +89,8 @@ Response `201`:
 ```json
 { "id": 1, "name": "Sala Vermelha", "capacity": 8, "location": "3º andar" }
 ```
-Erros: `409` nome duplicado; `422` capacidade inválida.
+Erros: `409` nome duplicado; `422` corpo inválido. `name` e `location` têm
+comprimento de 1 a 120 caracteres; `capacity` é inteiro positivo.
 
 ### `GET /rooms` / `GET /rooms/{id}`
 Response `200`: lista ou objeto Room. `404` se `id` não existe.
@@ -98,18 +99,26 @@ Response `200`: lista ou objeto Room. `404` se `id` não existe.
 Request: `{ "name": "Caio Diniz", "email": "caio@example.com" }`
 Response `201`: objeto User. Erros: `409` e-mail duplicado; `422` e-mail inválido.
 
+### `GET /users` / `GET /users/{id}`
+Response `200`: lista ou objeto User (`id`, `name`, `email`). `404` se o usuário
+consultado não existe. O nome enviado na criação tem de 1 a 120 caracteres.
+As listagens de salas e usuários não implementam paginação nem ordenação explícita.
+
 ### `POST /bookings`
 Request:
 ```json
 {
   "room_id": 1,
   "user_id": 1,
-  "start_time": "2026-09-15T14:00:00",
-  "end_time": "2026-09-15T15:00:00",
+  "start_time": "2030-09-15T14:00:00",
+  "end_time": "2030-09-15T15:00:00",
   "attendees_count": 5
 }
 ```
-Response `201`: objeto Booking com `status: "CONFIRMED"`.
+As datas são ilustrativas: na demonstração, usar um dia futuro em relação ao
+relógio do servidor. `attendees_count` é inteiro positivo; IDs são inteiros.
+Response `201`: objeto Booking com `id`, `room_id`, `user_id`, `start_time`,
+`end_time`, `attendees_count`, `status: "CONFIRMED"` e `created_at` em UTC sem offset.
 Erros:
 - `404` sala ou usuário não existe (RN07)
 - `409` conflito de horário (RN01)
@@ -130,7 +139,19 @@ Response `200`: lista de intervalos livres dentro do expediente naquele dia, cal
 partir das reservas `CONFIRMED` existentes.
 
 ### `GET /users/{id}/bookings`
-Response `200`: lista de reservas (todas, com `status`) do usuário.
+Response `200`: lista de reservas (todas, com `status`) do usuário, inclusive
+canceladas, sem ordenação explícita. `404` se o usuário não existe.
+
+### Saúde, documentação e erros comuns
+- `GET /health`: `200`, `{"status":"ok"}`; não realiza consulta ao banco.
+- `GET /docs`: interface Swagger; `GET /redoc`: documentação ReDoc.
+- `GET /openapi.json`: contrato OpenAPI gerado a partir da aplicação.
+- Parâmetros/corpos estruturalmente inválidos retornam `422` com a lista de
+  detalhes do FastAPI/Pydantic. Erros de domínio usam `detail` textual.
+- Disponibilidade exige `date`; parâmetro ausente/inválido retorna `422`, sala
+  ausente retorna `404`; cada intervalo contém `start` e `end` em UTC sem offset.
+- Não existem endpoints de edição de salas/usuários, autenticação ou exclusão
+  física de reservas nesta versão.
 
 ## 6. Decomposição em Unidades (componentes testáveis isoladamente)
 
@@ -138,13 +159,14 @@ Response `200`: lista de reservas (todas, com `status`) do usuário.
 booking_service.py
   ├─ has_conflict(existing_bookings, new_start, new_end) -> bool          [pura, sem DB]
   ├─ validate_business_hours(start, end, hours_start, hours_end) -> None  [levanta ValueError]
+  ├─ validate_not_in_past(start, now) -> None
   ├─ validate_capacity(attendees, room_capacity) -> None
   ├─ validate_interval(start, end) -> None
   └─ compute_availability(existing_bookings, day, hours_start, hours_end) -> list[slot]
 
 routers/rooms.py      -> depende apenas de database + schemas
 routers/users.py      -> depende apenas de database + schemas
-routers/bookings.py   -> orquestra booking_service + repositórios de rooms/users/bookings
+routers/bookings.py   -> orquestra booking_service + consultas SQLAlchemy aos modelos
 ```
 
 Essa separação existe para permitir testar toda a lógica de negócio (a parte que mais muda e
@@ -206,8 +228,8 @@ O histórico detalhado está em [REFINEMENTS.md](REFINEMENTS.md).
   por inserção; ver [comparativo](AVISOS_DEPRECACAO.md).
 - Os 17 testes novos passaram na implementação existente. Eles ampliam a validação,
   mas não demonstram, por si, uma nova falha lógica ou mudança de requisito.
-- A execução Docker final da versão integrada deve ser registrada na Issue #34.
-  Resultados locais e resultados Docker devem ser identificados separadamente.
+- A execução Docker da Entrega 2 foi registrada no [relatório](EXECUTION_REPORT.md).
+  A Entrega 3 exige evidências da versão final, distinguindo execução local e Docker.
 - Cada PR deve indicar escopo, critérios de aceitação, validação e revisão do outro
   integrante antes do merge. Não há aprovação retroativa dos PRs originais #1-#7.
 
@@ -216,3 +238,36 @@ O histórico detalhado está em [REFINEMENTS.md](REFINEMENTS.md).
 Autenticação/autorização real, recorrência, notificações e múltiplos escritórios
 continuam fora do escopo definido na seção 1. A aprovação da suíte não é evidência
 de segurança para exposição pública, de teste de carga ou de ausência total de bugs.
+
+## 10. Arquitetura As-Built e operação
+
+| Componente | Implementação entregue |
+|---|---|
+| Inicialização | FastAPI em `src/app/main.py`; lifespan cria tabelas ausentes com SQLAlchemy |
+| HTTP | Routers de salas, usuários e reservas; contratos em `schemas.py` |
+| Domínio | Funções puras de validação, conflito e disponibilidade em `booking_service.py` |
+| Persistência | SQLite; modelos Room, User e Booking; sessões por requisição |
+| Escrita | `BEGIN IMMEDIATE` antes das leituras; commit ou rollback; espera máxima de 30 s |
+| Contêiner | Python 3.12 slim, Uvicorn na porta 8000; Compose publica 8000 e verifica `/health` |
+| Dados | Volume `booking-data` em `/app/data`; evidências montadas de `./evidence` |
+| Testes | pytest, pytest-cov, TestClient, SQLite isolado; harness em `scripts/run_tests.py` |
+
+O fluxo de criação é: validação estrutural e normalização UTC → transação de
+escrita → existência de sala/usuário → intervalo, passado, expediente e capacidade
+→ conflito → persistência → resposta 201. O diagrama está no [README](../README.md).
+
+As variáveis são `DATABASE_URL`, `BUSINESS_HOURS_START` e `BUSINESS_HOURS_END`.
+O padrão local é `sqlite:///./data/booking.db`; o Compose fixa
+`sqlite:////app/data/booking.db`. O expediente padrão é 08:00–20:00 UTC.
+Configuração inválida de expediente ou banco não SQLite impede a inicialização.
+Não há migrações de schema automáticas: `create_all` cria tabelas ausentes.
+
+## 11. Homologação da versão final
+
+O responsável deve identificar o commit testado, executar o harness completo,
+preservar log/JUnit/coverage/metadados e registrar a revisão humana. Critérios:
+100% dos testes coletados aprovados, saída zero, cobertura crítica acima da meta
+RNF04 e demonstração do fluxo principal. Avisos devem permanecer visíveis.
+As instruções operacionais estão no [checklist de encerramento](ENTREGA3_CHECKLIST.md).
+Não se infere segurança de produção, ausência de bugs ou revisão humana a partir
+da passagem dos testes. A tag da release deve apontar para o commit final aprovado.
